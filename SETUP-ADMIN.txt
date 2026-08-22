@@ -1,0 +1,23 @@
+CV MUDAMAS MANDIRI - SETUP LOGIN ADMIN SUPABASE
+
+1. SUPABASE > SQL Editor > New query.
+   Paste seluruh isi file supabase-setup.sql lalu klik Run.
+
+2. SUPABASE > Authentication > Users > Add user / Create new user.
+   Untuk username "admin", gunakan email internal:
+   admin@admin.mudamas.local
+   Password: tentukan sendiri password admin yang kuat.
+
+3. Setelah user dibuat, trigger database akan membuat baris profiles otomatis.
+
+4. Jika akun pertama harus menjadi OWNER, buka SQL Editor dan jalankan:
+   update public.profiles set role = 'owner', full_name = 'Administrator Utama' where username = 'admin';
+
+5. Buka admin-login.html.
+   Login menggunakan:
+   Username: admin
+   Password: password yang dibuat pada langkah 2.
+
+CATATAN KEAMANAN:
+- Website hanya menggunakan Publishable Key.
+- Jangan pernah memasukkan Secret Key / service_role ke file HTML atau JavaScript.

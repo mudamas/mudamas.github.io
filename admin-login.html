@@ -46,8 +46,8 @@
         <p>Gunakan akun administrator perusahaan untuk mengakses dashboard internal.</p>
 
         <form class="admin-form" id="adminLoginForm" novalidate>
-          <label>Email Administrator
-            <input type="email" name="email" autocomplete="username" placeholder="admin@mudamasmandiri.com" required>
+          <label>Username
+            <input type="text" name="username" autocomplete="username" placeholder="Masukkan username" spellcheck="false" autocapitalize="none" required>
           </label>
           <label>Password
             <div class="password-wrap">
@@ -55,23 +55,22 @@
               <button class="toggle-password" id="toggleAdminPassword" type="button" aria-label="Tampilkan password">◉</button>
             </div>
           </label>
-          <div class="admin-form-row">
-            <label class="admin-remember"><input type="checkbox" name="remember"> Ingat perangkat ini</label>
-            <a class="forgot-link" href="#" aria-disabled="true">Lupa password?</a>
-          </div>
+          <div class="admin-auth-note">Akses khusus pengguna internal yang telah terdaftar.</div>
           <button class="admin-submit" type="submit">Masuk ke Dashboard →</button>
           <div class="admin-login-status" id="adminLoginStatus" role="status"></div>
         </form>
 
         <div class="admin-security">
           <div class="security-dot">✓</div>
-          <div><strong>Portal Internal Perusahaan</strong><span>Autentikasi produksi akan dihubungkan ke backend/database saat modul admin mulai dibangun. Tidak ada password yang disimpan di file HTML ini.</span></div>
+          <div><strong>Portal Internal Perusahaan</strong><span>Autentikasi menggunakan Supabase Auth. Password tidak pernah disimpan di file website.</span></div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="admin-login-footer">© 2026 CV Mudamas Mandiri · Internal Administration Portal</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script src="admin-login.js"></script>
 </body>
 </html>

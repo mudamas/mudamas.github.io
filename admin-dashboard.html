@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#061a33">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin Dashboard | CV Mudamas Mandiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-dashboard-page">
+  <div class="admin-shell" id="adminShell" hidden>
+    <aside class="admin-sidebar">
+      <a class="admin-brand" href="admin-dashboard.html"><img src="logo-mudamas.png" alt="CV Mudamas Mandiri"></a>
+      <div class="admin-side-label">ADMINISTRATION</div>
+      <nav class="admin-side-nav">
+        <a class="active" href="admin-dashboard.html"><span>◫</span> Dashboard</a>
+        <a href="#projects"><span>◇</span> Manajemen Proyek</a>
+        <a href="#finance"><span>◉</span> Keuangan & Cash Flow</a>
+        <a href="#clients"><span>◎</span> Klien & Vendor</a>
+        <a href="#reports"><span>▤</span> Laporan</a>
+      </nav>
+      <div class="admin-side-footer">
+        <a href="index.html">← Website Utama</a>
+        <button type="button" id="adminLogout">Keluar</button>
+      </div>
+    </aside>
+
+    <main class="admin-dashboard-main">
+      <header class="admin-topbar">
+        <div>
+          <div class="admin-eyebrow">Mudamas Internal Management</div>
+          <h1>Dashboard</h1>
+        </div>
+        <div class="admin-profile-chip">
+          <span class="profile-avatar" id="profileInitial">A</span>
+          <div><b id="profileName">Administrator</b><small id="profileRole">Admin</small></div>
+        </div>
+      </header>
+
+      <section class="admin-welcome-card">
+        <div><span>OPERATION OVERVIEW</span><h2>Selamat datang, <b id="welcomeName">Administrator</b>.</h2><p>Fondasi admin sudah terhubung ke Supabase. Modul proyek dan keuangan akan menggunakan akun yang sama.</p></div>
+        <div class="admin-secure-badge"><i></i> Secure Session</div>
+      </section>
+
+      <section class="admin-metric-grid">
+        <article><small>PROYEK AKTIF</small><strong>0</strong><span>Belum ada data proyek</span></article>
+        <article><small>NILAI KONTRAK</small><strong>Rp0</strong><span>Total proyek aktif</span></article>
+        <article><small>KAS MASUK</small><strong>Rp0</strong><span>Periode berjalan</span></article>
+        <article><small>KAS KELUAR</small><strong>Rp0</strong><span>Periode berjalan</span></article>
+      </section>
+
+      <section class="admin-module-grid">
+        <article id="projects"><div class="module-no">01</div><h3>Manajemen Proyek</h3><p>Kelola proyek, nilai kontrak, progres, jadwal, dokumen, pengeluaran, dan status pelaksanaan.</p><button disabled>Segera dibangun</button></article>
+        <article id="finance"><div class="module-no">02</div><h3>Keuangan & Cash Flow</h3><p>Catat pemasukan, pengeluaran, saldo kas, biaya proyek, piutang, kewajiban, dan profit per proyek.</p><button disabled>Segera dibangun</button></article>
+      </section>
+    </main>
+  </div>
+
+  <div class="admin-loading" id="adminLoading">Memverifikasi sesi administrator...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>
