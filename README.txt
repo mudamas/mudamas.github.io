@@ -1,13 +1,15 @@
-CV MUDAMAS MANDIRI — WEBSITE
+CV MUDAMAS MANDIRI — WEBSITE V8 ADMIN ENTRY
 
-Struktur paket ini sengaja dibuat FLAT / SEJAJAR.
-Tidak ada folder assets, img, css, js, atau subfolder lain.
+Semua file berada sejajar dalam satu folder (tanpa subfolder).
 
 File utama:
-- index.html
-- style.css
-- app.js
-- logo-mudamas.png
+- index.html            Website perusahaan
+- style.css             Seluruh styling website + admin login
+- app.js                Interaksi website utama
+- admin-login.html      Halaman login administrator
+- admin-login.js        Interaksi halaman login
+- logo-mudamas.png      Logo perusahaan
+- file gambar lainnya   Aset visual website
 
-File gambar pendukung juga ditempatkan sejajar di direktori yang sama.
-Untuk menjalankan website, buka index.html.
+Catatan keamanan:
+Halaman login belum terhubung ke backend/authentication. Tidak ada username/password hardcoded di file. Integrasi autentikasi aman dilakukan saat dashboard admin dibangun.

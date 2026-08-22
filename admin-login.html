@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#061a33">
+  <title>Admin Login | CV Mudamas Mandiri</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+  <header class="admin-login-header">
+    <div class="container">
+      <a href="index.html" aria-label="Kembali ke website"><img src="logo-mudamas.png" alt="CV Mudamas Mandiri"></a>
+      <a class="admin-back" href="index.html"><span>←</span> Kembali ke Website</a>
+    </div>
+  </header>
+
+  <main class="admin-login-main">
+    <section class="admin-login-shell" aria-label="Login administrator Mudamas Mandiri">
+      <div class="admin-login-intro">
+        <div class="admin-eyebrow">Internal Management System</div>
+        <h1>Satu pusat kendali untuk <span>proyek dan keuangan.</span></h1>
+        <p>Portal internal CV Mudamas Mandiri disiapkan sebagai pusat pengelolaan operasional perusahaan, mulai dari progres proyek hingga pencatatan arus kas.</p>
+
+        <div class="admin-modules">
+          <div class="admin-module">
+            <div class="module-icon">01</div>
+            <b>Manajemen Proyek</b>
+            <span>Monitoring proyek, progres pekerjaan, nilai kontrak, jadwal, dokumen, dan status pelaksanaan.</span>
+          </div>
+          <div class="admin-module">
+            <div class="module-icon">02</div>
+            <b>Keuangan & Cash Flow</b>
+            <span>Pencatatan kas masuk/keluar, biaya proyek, piutang, kewajiban, dan ringkasan posisi keuangan.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-login-card">
+        <div class="mini-label">Secure Access</div>
+        <h2>Login Administrator</h2>
+        <p>Gunakan akun administrator perusahaan untuk mengakses dashboard internal.</p>
+
+        <form class="admin-form" id="adminLoginForm" novalidate>
+          <label>Email Administrator
+            <input type="email" name="email" autocomplete="username" placeholder="admin@mudamasmandiri.com" required>
+          </label>
+          <label>Password
+            <div class="password-wrap">
+              <input id="adminPassword" type="password" name="password" autocomplete="current-password" placeholder="Masukkan password" required>
+              <button class="toggle-password" id="toggleAdminPassword" type="button" aria-label="Tampilkan password">◉</button>
+            </div>
+          </label>
+          <div class="admin-form-row">
+            <label class="admin-remember"><input type="checkbox" name="remember"> Ingat perangkat ini</label>
+            <a class="forgot-link" href="#" aria-disabled="true">Lupa password?</a>
+          </div>
+          <button class="admin-submit" type="submit">Masuk ke Dashboard →</button>
+          <div class="admin-login-status" id="adminLoginStatus" role="status"></div>
+        </form>
+
+        <div class="admin-security">
+          <div class="security-dot">✓</div>
+          <div><strong>Portal Internal Perusahaan</strong><span>Autentikasi produksi akan dihubungkan ke backend/database saat modul admin mulai dibangun. Tidak ada password yang disimpan di file HTML ini.</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="admin-login-footer">© 2026 CV Mudamas Mandiri · Internal Administration Portal</footer>
+  <script src="admin-login.js"></script>
+</body>
+</html>
