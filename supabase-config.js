@@ -1,7 +1,15 @@
-// Frontend-safe Supabase configuration.
-// IMPORTANT: only use the Publishable / anon key here. Never place a secret/service-role key in browser files.
-window.MUDAMAS_SUPABASE = {
-  url: 'https://nzkoymhwgukbaegjrvau.supabase.co',
-  publishableKey: 'sb_publishable_d33uDgFnZO9pr_vm0InylQ_I-LYspRb',
-  usernameDomain: 'admin.mudamas.local'
-};
+// Frontend-safe Supabase configuration
+const MUDAMAS_SUPABASE_URL = 'https://nzkoymhwgukbaegjrvau.supabase.co';
+const MUDAMAS_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_d33uDgFnZO9pr_vm0InylQ_I-LYspRb';
+
+window.mudamasSupabase = window.supabase.createClient(
+  MUDAMAS_SUPABASE_URL,
+  MUDAMAS_SUPABASE_PUBLISHABLE_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: false
+    }
+  }
+);

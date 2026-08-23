@@ -1,88 +1,77 @@
 (() => {
   const form = document.getElementById('adminLoginForm');
   const status = document.getElementById('adminLoginStatus');
-  const toggle = document.getElementById('toggleAdminPassword');
   const passwordInput = document.getElementById('adminPassword');
+  const toggle = document.getElementById('toggleAdminPassword');
+  const submit = form?.querySelector('button[type="submit"]');
+  const sb = window.mudamasSupabase;
 
-  const cfg = window.MUDAMAS_SUPABASE;
-  if (!cfg || !window.supabase) {
-    status.textContent = 'Konfigurasi autentikasi belum tersedia.';
-    status.className = 'admin-login-status error';
-    return;
+  function show(message, type = '') {
+    if (!status) return;
+    status.textContent = message;
+    status.className = 'admin-login-status' + (type ? ' ' + type : '');
   }
 
-  const client = window.supabase.createClient(cfg.url, cfg.publishableKey, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: false
-    }
-  });
-
-  const normalizeUsername = (value) => value
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9._-]/g, '');
-
-  const usernameToEmail = (username) => `${normalizeUsername(username)}@${cfg.usernameDomain}`;
-
   toggle?.addEventListener('click', () => {
-    const show = passwordInput.type === 'password';
-    passwordInput.type = show ? 'text' : 'password';
-    toggle.textContent = show ? '◌' : '◉';
-    toggle.setAttribute('aria-label', show ? 'Sembunyikan password' : 'Tampilkan password');
+    const hidden = passwordInput.type === 'password';
+    passwordInput.type = hidden ? 'text' : 'password';
+    toggle.setAttribute('aria-label', hidden ? 'Sembunyikan password' : 'Tampilkan password');
   });
 
-  // If an active session already exists, go straight to the dashboard.
-  client.auth.getSession().then(({ data }) => {
-    if (data?.session) window.location.replace('admin-dashboard.html');
-  });
+  async function redirectIfLoggedIn() {
+    if (!sb) return;
+    const { data } = await sb.auth.getSession();
+    if (data?.session) location.href = 'admin-dashboard.html';
+  }
+  redirectIfLoggedIn();
 
-  form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const username = normalizeUsername(form.username.value);
-    const password = form.password.value;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!sb) { show('Konfigurasi Supabase tidak termuat.', 'error'); return; }
 
-    status.textContent = '';
-    status.className = 'admin-login-status';
+    const fd = new FormData(form);
+    const username = String(fd.get('username') || '').trim().toLowerCase();
+    const password = String(fd.get('password') || '');
 
-    if (!username || !password) {
-      status.textContent = 'Username dan password wajib diisi.';
-      status.classList.add('error');
-      return;
-    }
+    if (!username || !password) { show('Masukkan username dan password.', 'error'); return; }
+    if (!/^[a-z0-9._-]+$/.test(username)) { show('Format username tidak valid.', 'error'); return; }
 
-    const submit = form.querySelector('button[type="submit"]');
+    const email = `${username}@admin.mudamas.local`;
     submit.disabled = true;
     submit.textContent = 'Memverifikasi...';
+    show('Memeriksa akun administrator...');
 
     try {
-      const { data, error } = await client.auth.signInWithPassword({
-        email: usernameToEmail(username),
-        password
-      });
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
       if (error) throw error;
 
-      const { data: profile, error: profileError } = await client
+      const user = data.user;
+      const { data: profile, error: profileError } = await sb
         .from('profiles')
-        .select('username, full_name, role, is_active')
-        .eq('id', data.user.id)
-        .maybeSingle();
+        .select('id, username, full_name, role, is_active')
+        .eq('id', user.id)
+        .single();
 
-      if (profileError) throw profileError;
-      if (!profile || profile.is_active !== true) {
-        await client.auth.signOut();
-        throw new Error('Akun admin tidak aktif atau profil belum disiapkan.');
+      if (profileError) {
+        await sb.auth.signOut();
+        throw new Error('Akun Auth ditemukan, tetapi profil admin belum tersedia. Pastikan tabel profiles dan trigger sudah dibuat.');
+      }
+      if (!profile.is_active) {
+        await sb.auth.signOut();
+        throw new Error('Akun administrator sedang dinonaktifkan.');
+      }
+      if (profile.username !== username) {
+        await sb.auth.signOut();
+        throw new Error('Username tidak cocok dengan profil administrator.');
       }
 
-      status.textContent = 'Login berhasil. Membuka dashboard...';
-      status.classList.add('success');
-      window.location.replace('admin-dashboard.html');
+      show('Login berhasil. Membuka dashboard...', 'success');
+      location.href = 'admin-dashboard.html';
     } catch (err) {
-      status.textContent = err?.message === 'Invalid login credentials'
-        ? 'Username atau password salah.'
-        : (err?.message || 'Login gagal. Silakan coba lagi.');
-      status.classList.add('error');
+      let msg = err?.message || 'Login gagal.';
+      if (/invalid login credentials/i.test(msg)) msg = 'Username atau password salah. Pastikan user admin@admin.mudamas.local sudah dibuat di Supabase Authentication.';
+      if (/email not confirmed/i.test(msg)) msg = 'Akun belum dikonfirmasi. Buka Supabase → Authentication → Users lalu pastikan email admin sudah Confirmed.';
+      show(msg, 'error');
       submit.disabled = false;
       submit.textContent = 'Masuk ke Dashboard →';
     }
