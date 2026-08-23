@@ -1,69 +1,36 @@
 <!doctype html>
-<html lang="id">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#061a33">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Admin Dashboard | CV Mudamas Mandiri</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="admin-dashboard-page">
-  <div class="admin-shell" id="adminShell" hidden>
-    <aside class="admin-sidebar">
-      <a class="admin-brand" href="admin-dashboard.html"><img src="logo-mudamas.png" alt="CV Mudamas Mandiri"></a>
-      <div class="admin-side-label">ADMINISTRATION</div>
-      <nav class="admin-side-nav">
-        <a class="active" href="admin-dashboard.html"><span>◫</span> Dashboard</a>
-        <a href="#projects"><span>◇</span> Manajemen Proyek</a>
-        <a href="#finance"><span>◉</span> Keuangan & Cash Flow</a>
-        <a href="#clients"><span>◎</span> Klien & Vendor</a>
-        <a href="#reports"><span>▤</span> Laporan</a>
-      </nav>
-      <div class="admin-side-footer">
-        <a href="index.html">← Website Utama</a>
-        <button type="button" id="adminLogout">Keluar</button>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Dashboard | Mudamas Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head>
+<body><div class="admin-app" id="app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="admin-dashboard.html"><img src="logo-mudamas.png" alt="Mudamas Mandiri"></a>
+      <div class="side-kicker">INTERNAL MANAGEMENT</div>
+      <nav class="nav"><a class="active" href="admin-dashboard.html"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+<a class="" href="admin-projects.html"><i data-lucide="briefcase-business"></i>Manajemen Proyek</a>
+<a class="" href="admin-finance.html"><i data-lucide="wallet-cards"></i>Keuangan & Cash Flow</a>
+<a class="" href="admin-partners.html"><i data-lucide="users-round"></i>Klien & Vendor</a>
+<a class="" href="admin-reports.html"><i data-lucide="chart-no-axes-combined"></i>Laporan</a>
+<a class="" href="admin-settings.html"><i data-lucide="settings-2"></i>Pengaturan</a></nav>
+      <div class="side-bottom">
+        <button type="button" id="adminLogout">↳ Keluar dari sistem</button>
       </div>
-    </aside>
-
-    <main class="admin-dashboard-main">
-      <header class="admin-topbar">
-        <div>
-          <div class="admin-eyebrow">Mudamas Internal Management</div>
-          <h1>Dashboard</h1>
-        </div>
-        <div class="admin-profile-chip">
-          <span class="profile-avatar" id="profileInitial">A</span>
-          <div><b id="profileName">Administrator</b><small id="profileRole">Admin</small></div>
-        </div>
-      </header>
-
-      <section class="admin-welcome-card">
-        <div><span>OPERATION OVERVIEW</span><h2>Selamat datang, <b id="welcomeName">Administrator</b>.</h2><p>Fondasi admin sudah terhubung ke Supabase. Modul proyek dan keuangan akan menggunakan akun yang sama.</p></div>
-        <div class="admin-secure-badge"><i></i> Secure Session</div>
-      </section>
-
-      <section class="admin-metric-grid">
-        <article><small>PROYEK AKTIF</small><strong>0</strong><span>Belum ada data proyek</span></article>
-        <article><small>NILAI KONTRAK</small><strong>Rp0</strong><span>Total proyek aktif</span></article>
-        <article><small>KAS MASUK</small><strong>Rp0</strong><span>Periode berjalan</span></article>
-        <article><small>KAS KELUAR</small><strong>Rp0</strong><span>Periode berjalan</span></article>
-      </section>
-
-      <section class="admin-module-grid">
-        <article id="projects"><div class="module-no">01</div><h3>Manajemen Proyek</h3><p>Kelola proyek, nilai kontrak, progres, jadwal, dokumen, pengeluaran, dan status pelaksanaan.</p><button disabled>Segera dibangun</button></article>
-        <article id="finance"><div class="module-no">02</div><h3>Keuangan & Cash Flow</h3><p>Catat pemasukan, pengeluaran, saldo kas, biaya proyek, piutang, kewajiban, dan profit per proyek.</p><button disabled>Segera dibangun</button></article>
-      </section>
-    </main>
-  </div>
-
-  <div class="admin-loading" id="adminLoading">Memverifikasi sesi administrator...</div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
-  <script src="admin-dashboard.js"></script>
-</body>
-</html>
+    </aside><main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="mobile-menu" id="mobileMenu"><i data-lucide="menu"></i></button>
+        <div><div class="eyebrow">Mudamas Administration</div><h1 class="page-title">Dashboard</h1></div>
+      </div>
+      <div class="profile"><span class="avatar" data-profile-initial>A</span><div><b data-profile-name>Administrator</b><small data-profile-role>owner</small></div></div>
+    </header><div class="content">
+<section class="hero-card"><div><div class="eyebrow" style="color:#8fb0cb">Operation overview</div><h2>Selamat datang, <span data-profile-name>Administrator</span>.</h2><p>Ringkasan real-time proyek dan arus kas CV Mudamas Mandiri. Seluruh angka di bawah membaca database Supabase secara langsung.</p></div><div class="secure"><i></i> Secure Session</div></section>
+<section class="metrics">
+ <article class="metric"><div class="metric-head"><small>PROYEK AKTIF</small><span class="iconbox"><i data-lucide="briefcase-business"></i></span></div><strong id="mProjects">0</strong><span>Proyek sedang berjalan</span></article>
+ <article class="metric"><div class="metric-head"><small>NILAI KONTRAK AKTIF</small><span class="iconbox"><i data-lucide="file-check-2"></i></span></div><strong id="mContract">Rp0</strong><span>Akumulasi proyek aktif</span></article>
+ <article class="metric"><div class="metric-head"><small>KAS MASUK BULAN INI</small><span class="iconbox"><i data-lucide="circle-arrow-down"></i></span></div><strong id="mIncome">Rp0</strong><span>Penerimaan periode berjalan</span></article>
+ <article class="metric"><div class="metric-head"><small>KAS KELUAR BULAN INI</small><span class="iconbox"><i data-lucide="circle-arrow-up"></i></span></div><strong id="mExpense">Rp0</strong><span>Pengeluaran periode berjalan</span></article>
+</section>
+<section class="grid-2">
+ <article class="card"><div class="card-title"><div><h3>Proyek terbaru</h3><p>Status dan progres pelaksanaan</p></div><a class="btn btn-secondary btn-sm" href="admin-projects.html">Lihat semua</a></div><div class="table-wrap"><table><thead><tr><th>Proyek</th><th>Klien</th><th>Status</th><th>Progres</th><th>Nilai Kontrak</th></tr></thead><tbody id="recentProjects"></tbody></table><div class="empty" id="projectEmpty"><strong>Belum ada proyek</strong>Tambahkan proyek pertama dari menu Manajemen Proyek.</div></div></article>
+ <article class="card"><div class="card-title"><div><h3>Cash flow terbaru</h3><p>Transaksi perusahaan terkini</p></div><a class="btn btn-secondary btn-sm" href="admin-finance.html">Kelola kas</a></div><div id="recentTx"></div><div class="empty" id="txEmpty"><strong>Belum ada transaksi</strong>Catat pemasukan atau pengeluaran pertama.</div></article>
+</section></div></main></div><div class="loading-screen" id="loading">Memverifikasi sesi administrator...</div><div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script src="supabase-config.js"></script><script src="admin-common.js"></script><script src="admin-dashboard.js"></script><script>lucide.createIcons()</script></body></html>

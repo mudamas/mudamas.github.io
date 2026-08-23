@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Laporan | Mudamas Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head>
+<body><div class="admin-app" id="app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="admin-dashboard.html"><img src="logo-mudamas.png" alt="Mudamas Mandiri"></a>
+      <div class="side-kicker">INTERNAL MANAGEMENT</div>
+      <nav class="nav"><a class="" href="admin-dashboard.html"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+<a class="" href="admin-projects.html"><i data-lucide="briefcase-business"></i>Manajemen Proyek</a>
+<a class="" href="admin-finance.html"><i data-lucide="wallet-cards"></i>Keuangan & Cash Flow</a>
+<a class="" href="admin-partners.html"><i data-lucide="users-round"></i>Klien & Vendor</a>
+<a class="active" href="admin-reports.html"><i data-lucide="chart-no-axes-combined"></i>Laporan</a>
+<a class="" href="admin-settings.html"><i data-lucide="settings-2"></i>Pengaturan</a></nav>
+      <div class="side-bottom">
+        <button type="button" id="adminLogout">↳ Keluar dari sistem</button>
+      </div>
+    </aside><main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="mobile-menu" id="mobileMenu"><i data-lucide="menu"></i></button>
+        <div><div class="eyebrow">Mudamas Administration</div><h1 class="page-title">Laporan</h1></div>
+      </div>
+      <div class="profile"><span class="avatar" data-profile-initial>A</span><div><b data-profile-name>Administrator</b><small data-profile-role>owner</small></div></div>
+    </header><div class="content">
+<section class="report-grid">
+<article class="report-card"><div class="eyebrow">Portofolio</div><h3>Total Nilai Kontrak</h3><p>Akumulasi seluruh proyek yang tercatat.</p><div class="big" id="rContract">Rp0</div></article>
+<article class="report-card"><div class="eyebrow">Realisasi</div><h3>Total Pemasukan</h3><p>Seluruh cash-in perusahaan.</p><div class="big" id="rIncome">Rp0</div></article>
+<article class="report-card"><div class="eyebrow">Biaya</div><h3>Total Pengeluaran</h3><p>Seluruh cash-out perusahaan.</p><div class="big" id="rExpense">Rp0</div></article>
+<article class="report-card"><div class="eyebrow">Margin Kas</div><h3>Net Cash Flow</h3><p>Pemasukan dikurangi pengeluaran.</p><div class="big" id="rNet">Rp0</div></article>
+<article class="report-card"><div class="eyebrow">Proyek</div><h3>Proyek Selesai</h3><p>Jumlah proyek dengan status selesai.</p><div class="big" id="rCompleted">0</div></article>
+<article class="report-card"><div class="eyebrow">Pipeline</div><h3>Proyek Aktif</h3><p>Jumlah proyek yang sedang berjalan.</p><div class="big" id="rActive">0</div></article>
+</section>
+<section class="card" style="margin-top:16px"><div class="card-title"><div><h3>Ringkasan Profit Proyek</h3><p>Nilai kontrak dibandingkan pengeluaran yang dikaitkan ke proyek</p></div></div><div class="table-wrap"><table><thead><tr><th>Proyek</th><th>Nilai Kontrak</th><th>Pengeluaran Tercatat</th><th>Selisih</th></tr></thead><tbody id="profitRows"></tbody></table><div class="empty" id="profitEmpty"><strong>Belum ada data</strong>Profit akan muncul setelah proyek dan transaksi dicatat.</div></div></section></div></main></div><div class="loading-screen" id="loading">Memverifikasi sesi administrator...</div><div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script src="supabase-config.js"></script><script src="admin-common.js"></script><script src="admin-reports.js"></script><script>lucide.createIcons()</script></body></html>

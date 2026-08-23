@@ -1,37 +1,12 @@
-(async () => {
-  const sb = window.mudamasSupabase;
-  const loading = document.getElementById('adminLoading');
-  const shell = document.getElementById('adminShell');
-
-  function goLogin() { location.replace('admin-login.html'); }
-  if (!sb) { loading.textContent = 'Konfigurasi Supabase tidak termuat.'; return; }
-
-  const { data: { session }, error } = await sb.auth.getSession();
-  if (error || !session) { goLogin(); return; }
-
-  const { data: profile, error: profileError } = await sb
-    .from('profiles')
-    .select('username, full_name, role, is_active')
-    .eq('id', session.user.id)
-    .single();
-
-  if (profileError || !profile || !profile.is_active) {
-    await sb.auth.signOut();
-    goLogin();
-    return;
-  }
-
-  const name = profile.full_name || profile.username || 'Administrator';
-  document.getElementById('profileName').textContent = name;
-  document.getElementById('welcomeName').textContent = name;
-  document.getElementById('profileRole').textContent = (profile.role || 'admin').replaceAll('_',' ');
-  document.getElementById('profileInitial').textContent = name.charAt(0).toUpperCase();
-
-  loading.hidden = true;
-  shell.hidden = false;
-
-  document.getElementById('adminLogout')?.addEventListener('click', async () => {
-    await sb.auth.signOut();
-    location.replace('admin-login.html');
-  });
-})();
+(async()=>{const auth=await requireAdmin();if(!auth)return;document.getElementById('loading').hidden=true;document.getElementById('app').hidden=false;
+const now=new Date(),start=new Date(now.getFullYear(),now.getMonth(),1).toISOString().slice(0,10);
+const [pRes,tRes,rpRes,rtRes]=await Promise.all([
+ sb.from('projects').select('id,contract_value').eq('status','active'),
+ sb.from('cash_transactions').select('transaction_type,amount').gte('transaction_date',start),
+ sb.from('projects').select('project_name,contract_value,progress,status,clients(name)').order('created_at',{ascending:false}).limit(5),
+ sb.from('cash_transactions').select('transaction_date,transaction_type,amount,description').order('transaction_date',{ascending:false}).order('created_at',{ascending:false}).limit(6)
+]);
+const projects=pRes.data||[],tx=tRes.data||[];document.getElementById('mProjects').textContent=projects.length;document.getElementById('mContract').textContent=fmtIDR(projects.reduce((a,x)=>a+Number(x.contract_value||0),0));document.getElementById('mIncome').textContent=fmtIDR(tx.filter(x=>x.transaction_type==='income').reduce((a,x)=>a+Number(x.amount||0),0));document.getElementById('mExpense').textContent=fmtIDR(tx.filter(x=>x.transaction_type==='expense').reduce((a,x)=>a+Number(x.amount||0),0));
+const rp=rpRes.data||[];if(rp.length){document.getElementById('projectEmpty').hidden=true;document.getElementById('recentProjects').innerHTML=rp.map(x=>`<tr><td><b>${x.project_name}</b></td><td>${x.clients?.name||'-'}</td><td>${statusBadge(x.status)}</td><td><div style="display:flex;gap:8px;align-items:center"><div class="progress"><span style="width:${Math.min(100,Number(x.progress||0))}%"></span></div><small>${Number(x.progress||0)}%</small></div></td><td><b>${fmtIDR(x.contract_value)}</b></td></tr>`).join('')}
+const rt=rtRes.data||[];if(rt.length){document.getElementById('txEmpty').hidden=true;document.getElementById('recentTx').innerHTML=rt.map(x=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid #eef1f4;gap:12px"><div><b style="font-size:9px">${x.description||'Transaksi'}</b><div style="font-size:7px;color:#8a97a5;margin-top:4px">${fmtDate(x.transaction_date)} · ${x.transaction_type==='income'?'Pemasukan':'Pengeluaran'}</div></div><strong style="font-size:10px;color:${x.transaction_type==='income'?'#17825f':'#b84242'}">${x.transaction_type==='income'?'+':'-'} ${fmtIDR(x.amount)}</strong></div>`).join('')}
+lucide.createIcons();})();

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Pengaturan | Mudamas Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head>
+<body><div class="admin-app" id="app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="admin-dashboard.html"><img src="logo-mudamas.png" alt="Mudamas Mandiri"></a>
+      <div class="side-kicker">INTERNAL MANAGEMENT</div>
+      <nav class="nav"><a class="" href="admin-dashboard.html"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+<a class="" href="admin-projects.html"><i data-lucide="briefcase-business"></i>Manajemen Proyek</a>
+<a class="" href="admin-finance.html"><i data-lucide="wallet-cards"></i>Keuangan & Cash Flow</a>
+<a class="" href="admin-partners.html"><i data-lucide="users-round"></i>Klien & Vendor</a>
+<a class="" href="admin-reports.html"><i data-lucide="chart-no-axes-combined"></i>Laporan</a>
+<a class="active" href="admin-settings.html"><i data-lucide="settings-2"></i>Pengaturan</a></nav>
+      <div class="side-bottom">
+        <button type="button" id="adminLogout">↳ Keluar dari sistem</button>
+      </div>
+    </aside><main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="mobile-menu" id="mobileMenu"><i data-lucide="menu"></i></button>
+        <div><div class="eyebrow">Mudamas Administration</div><h1 class="page-title">Pengaturan</h1></div>
+      </div>
+      <div class="profile"><span class="avatar" data-profile-initial>A</span><div><b data-profile-name>Administrator</b><small data-profile-role>owner</small></div></div>
+    </header><div class="content">
+<section class="grid-2"><article class="card"><div class="card-title"><div><h3>Profil Administrator</h3><p>Identitas akun yang sedang login</p></div></div><div class="form-grid"><div class="form-group"><label>Username</label><input id="sUsername" disabled></div><div class="form-group"><label>Role</label><input id="sRole" disabled></div><div class="form-group full"><label>Nama Lengkap</label><input id="sFullName"></div></div><div style="margin-top:14px"><button class="btn btn-primary" id="saveProfile">Simpan Profil</button></div></article><article class="card"><div class="card-title"><div><h3>Keamanan Sistem</h3><p>Informasi autentikasi dan akses</p></div></div><div style="display:grid;gap:11px;font-size:9px;color:#5d6d7e"><div style="padding:12px;border:1px solid #edf1f4;border-radius:12px"><b>Supabase Auth</b><br><span style="color:#8995a3">Session dan password dikelola oleh Supabase Authentication.</span></div><div style="padding:12px;border:1px solid #edf1f4;border-radius:12px"><b>Row Level Security</b><br><span style="color:#8995a3">Database admin hanya dapat diakses oleh user terautentikasi yang aktif.</span></div></div></article></section></div></main></div><div class="loading-screen" id="loading">Memverifikasi sesi administrator...</div><div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script src="supabase-config.js"></script><script src="admin-common.js"></script><script src="admin-settings.js"></script><script>lucide.createIcons()</script></body></html>

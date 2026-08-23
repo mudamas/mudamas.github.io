@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Keuangan & Cash Flow | Mudamas Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head>
+<body><div class="admin-app" id="app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="admin-dashboard.html"><img src="logo-mudamas.png" alt="Mudamas Mandiri"></a>
+      <div class="side-kicker">INTERNAL MANAGEMENT</div>
+      <nav class="nav"><a class="" href="admin-dashboard.html"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+<a class="" href="admin-projects.html"><i data-lucide="briefcase-business"></i>Manajemen Proyek</a>
+<a class="active" href="admin-finance.html"><i data-lucide="wallet-cards"></i>Keuangan & Cash Flow</a>
+<a class="" href="admin-partners.html"><i data-lucide="users-round"></i>Klien & Vendor</a>
+<a class="" href="admin-reports.html"><i data-lucide="chart-no-axes-combined"></i>Laporan</a>
+<a class="" href="admin-settings.html"><i data-lucide="settings-2"></i>Pengaturan</a></nav>
+      <div class="side-bottom">
+        <button type="button" id="adminLogout">↳ Keluar dari sistem</button>
+      </div>
+    </aside><main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="mobile-menu" id="mobileMenu"><i data-lucide="menu"></i></button>
+        <div><div class="eyebrow">Mudamas Administration</div><h1 class="page-title">Keuangan & Cash Flow</h1></div>
+      </div>
+      <div class="profile"><span class="avatar" data-profile-initial>A</span><div><b data-profile-name>Administrator</b><small data-profile-role>owner</small></div></div>
+    </header><div class="content">
+<div class="toolbar"><div class="toolbar-left"><div class="search"><i data-lucide="search"></i><input id="txSearch" placeholder="Cari transaksi..."></div><select id="txType"><option value="">Semua jenis</option><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div><div class="toolbar-right"><button class="btn btn-secondary" id="addAccount"><i data-lucide="landmark"></i> Akun Kas</button><button class="btn btn-primary" id="addTx"><i data-lucide="plus"></i> Catat Transaksi</button></div></div>
+<section class="metrics"><article class="metric"><small>SALDO KAS</small><strong id="fBalance">Rp0</strong><span>Saldo seluruh akun aktif</span></article><article class="metric"><small>PEMASUKAN BULAN INI</small><strong id="fIncome">Rp0</strong><span>Total cash-in</span></article><article class="metric"><small>PENGELUARAN BULAN INI</small><strong id="fExpense">Rp0</strong><span>Total cash-out</span></article><article class="metric"><small>NET CASH FLOW</small><strong id="fNet">Rp0</strong><span>Selisih pemasukan & pengeluaran</span></article></section>
+<section class="card"><div class="card-title"><div><h3>Arus Kas & Transaksi</h3><p>Semua pemasukan dan pengeluaran perusahaan</p></div></div><div class="table-wrap"><table><thead><tr><th>Tanggal</th><th>Jenis</th><th>Deskripsi</th><th>Proyek</th><th>Akun</th><th>Kategori</th><th>Nominal</th><th>Aksi</th></tr></thead><tbody id="txRows"></tbody></table><div class="empty" id="txEmpty"><strong>Belum ada transaksi</strong>Catat transaksi pertama untuk mulai menghitung cash flow.</div></div></section>
+<div class="modal-backdrop" id="txModal" hidden><div class="modal"><form id="txForm"><div class="modal-head"><h3>Catat Transaksi</h3><button type="button" class="modal-close" data-close-tx>×</button></div><div class="modal-body"><div class="form-grid">
+<div class="form-group"><label>Tanggal</label><input name="transaction_date" type="date" required></div><div class="form-group"><label>Jenis Transaksi</label><select name="transaction_type" required><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
+<div class="form-group"><label>Akun Kas / Bank</label><select name="account_id" id="txAccount" required></select></div><div class="form-group"><label>Proyek (opsional)</label><select name="project_id" id="txProject"><option value="">Tidak terkait proyek</option></select></div>
+<div class="form-group"><label>Kategori</label><input name="category" placeholder="Material, Pembayaran Klien, Operasional..."></div><div class="form-group"><label>Nominal</label><input name="amount" type="number" min="1" step="1000" required></div>
+<div class="form-group full"><label>Deskripsi</label><input name="description" required></div><div class="form-group full"><label>Nomor Referensi</label><input name="reference_number" placeholder="Invoice / kwitansi / transfer"></div>
+</div></div><div class="modal-foot"><button type="button" class="btn btn-secondary" data-close-tx>Batal</button><button class="btn btn-primary" type="submit">Simpan Transaksi</button></div></form></div></div>
+<div class="modal-backdrop" id="accountModal" hidden><div class="modal" style="width:min(520px,100%)"><form id="accountForm"><div class="modal-head"><h3>Tambah Akun Kas / Bank</h3><button type="button" class="modal-close" data-close-acc>×</button></div><div class="modal-body"><div class="form-grid"><div class="form-group full"><label>Nama Akun</label><input name="account_name" placeholder="Kas Utama / BCA Operasional" required></div><div class="form-group"><label>Jenis</label><select name="account_type"><option value="cash">Kas</option><option value="bank">Bank</option></select></div><div class="form-group"><label>Saldo Awal</label><input name="opening_balance" type="number" min="0" value="0"></div><div class="form-group"><label>Nama Bank</label><input name="bank_name"></div><div class="form-group"><label>No. Rekening</label><input name="account_number"></div></div></div><div class="modal-foot"><button type="button" class="btn btn-secondary" data-close-acc>Batal</button><button class="btn btn-primary">Simpan Akun</button></div></form></div></div></div></main></div><div class="loading-screen" id="loading">Memverifikasi sesi administrator...</div><div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script src="supabase-config.js"></script><script src="admin-common.js"></script><script src="admin-finance.js"></script><script>lucide.createIcons()</script></body></html>

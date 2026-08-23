@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Manajemen Proyek | Mudamas Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="admin.css"></head>
+<body><div class="admin-app" id="app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="admin-dashboard.html"><img src="logo-mudamas.png" alt="Mudamas Mandiri"></a>
+      <div class="side-kicker">INTERNAL MANAGEMENT</div>
+      <nav class="nav"><a class="" href="admin-dashboard.html"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+<a class="active" href="admin-projects.html"><i data-lucide="briefcase-business"></i>Manajemen Proyek</a>
+<a class="" href="admin-finance.html"><i data-lucide="wallet-cards"></i>Keuangan & Cash Flow</a>
+<a class="" href="admin-partners.html"><i data-lucide="users-round"></i>Klien & Vendor</a>
+<a class="" href="admin-reports.html"><i data-lucide="chart-no-axes-combined"></i>Laporan</a>
+<a class="" href="admin-settings.html"><i data-lucide="settings-2"></i>Pengaturan</a></nav>
+      <div class="side-bottom">
+        <button type="button" id="adminLogout">↳ Keluar dari sistem</button>
+      </div>
+    </aside><main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="mobile-menu" id="mobileMenu"><i data-lucide="menu"></i></button>
+        <div><div class="eyebrow">Mudamas Administration</div><h1 class="page-title">Manajemen Proyek</h1></div>
+      </div>
+      <div class="profile"><span class="avatar" data-profile-initial>A</span><div><b data-profile-name>Administrator</b><small data-profile-role>owner</small></div></div>
+    </header><div class="content">
+<div class="toolbar"><div class="toolbar-left"><div class="search"><i data-lucide="search"></i><input id="projectSearch" placeholder="Cari proyek, kode, atau lokasi..."></div><select id="projectStatus"><option value="">Semua status</option><option value="planning">Perencanaan</option><option value="active">Aktif</option><option value="on_hold">Ditunda</option><option value="completed">Selesai</option><option value="cancelled">Dibatalkan</option></select></div><div class="toolbar-right"><button class="btn btn-primary" id="addProject"><i data-lucide="plus"></i> Tambah Proyek</button></div></div>
+<section class="kpi-strip"><div class="kpi-mini"><small>TOTAL PROYEK</small><strong id="kpTotal">0</strong></div><div class="kpi-mini"><small>PROYEK AKTIF</small><strong id="kpActive">0</strong></div><div class="kpi-mini"><small>TOTAL NILAI KONTRAK</small><strong id="kpValue">Rp0</strong></div></section>
+<section class="card"><div class="card-title"><div><h3>Daftar Proyek</h3><p>Kelola nilai kontrak, periode, progres, dan status pelaksanaan</p></div></div><div class="table-wrap"><table><thead><tr><th>Kode</th><th>Proyek / Klien</th><th>Lokasi</th><th>Periode</th><th>Status</th><th>Progres</th><th>Nilai Kontrak</th><th>Aksi</th></tr></thead><tbody id="projectRows"></tbody></table><div class="empty" id="projectEmpty"><strong>Belum ada data proyek</strong>Klik “Tambah Proyek” untuk mulai mencatat proyek perusahaan.</div></div></section>
+<div class="modal-backdrop" id="projectModal" hidden><div class="modal"><form id="projectForm"><div class="modal-head"><h3 id="projectModalTitle">Tambah Proyek</h3><button class="modal-close" type="button" data-close>×</button></div><div class="modal-body"><input type="hidden" name="id"><div class="form-grid">
+<div class="form-group"><label>Kode Proyek</label><input name="project_code" placeholder="MDM-2026-001" required></div>
+<div class="form-group"><label>Nama Proyek</label><input name="project_name" required></div>
+<div class="form-group"><label>Klien</label><select name="client_id" id="projectClient"><option value="">Pilih klien</option></select></div>
+<div class="form-group"><label>Lokasi</label><input name="location"></div>
+<div class="form-group"><label>Nilai Kontrak</label><input name="contract_value" type="number" min="0" step="1000"></div>
+<div class="form-group"><label>Anggaran / Modal</label><input name="budget_value" type="number" min="0" step="1000"></div>
+<div class="form-group"><label>Tanggal Mulai</label><input name="start_date" type="date"></div>
+<div class="form-group"><label>Tanggal Selesai</label><input name="end_date" type="date"></div>
+<div class="form-group"><label>Status</label><select name="status"><option value="planning">Perencanaan</option><option value="active">Aktif</option><option value="on_hold">Ditunda</option><option value="completed">Selesai</option><option value="cancelled">Dibatalkan</option></select></div>
+<div class="form-group"><label>Progres (%)</label><input name="progress" type="number" min="0" max="100" value="0"></div>
+<div class="form-group full"><label>Deskripsi / Catatan</label><textarea name="description"></textarea></div>
+</div></div><div class="modal-foot"><button class="btn btn-secondary" type="button" data-close>Batal</button><button class="btn btn-primary" type="submit">Simpan Proyek</button></div></form></div></div></div></main></div><div class="loading-screen" id="loading">Memverifikasi sesi administrator...</div><div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script src="supabase-config.js"></script><script src="admin-common.js"></script><script src="admin-projects.js"></script><script>lucide.createIcons()</script></body></html>
